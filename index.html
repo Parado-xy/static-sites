@@ -38,28 +38,37 @@
     </div>
   </div>
 
-  <script>
-    const output = document.getElementById("output");
+<script>
+  const output = document.getElementById("output");
 
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude, accuracy } = position.coords;
-          output.innerHTML = `
-            <p class="coord">Latitude: <strong>${latitude.toFixed(6)}</strong></p>
-            <p class="coord">Longitude: <strong>${longitude.toFixed(6)}</strong></p>
-            <p class="coord">Accuracy: <strong>${accuracy} meters</strong></p>
-            <p>📡 Location retrieved at ${new Date(position.timestamp).toLocaleTimeString()}</p>
-          `;
-        },
-        (error) => {
-          output.innerHTML = `<p class="error">Error: ${error.message}</p>`;
-        },
-        { enableHighAccuracy: true }
-      );
-    } else {
-      output.innerHTML = `<p class="error">Geolocation is not supported by your browser.</p>`;
-    }
-  </script>
+  if ("geolocation" in navigator) {
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude, accuracy } = position.coords;
+
+        output.innerHTML = `
+          <p class="coord">Latitude: <strong>${latitude.toFixed(6)}</strong></p>
+          <p class="coord">Longitude: <strong>${longitude.toFixed(6)}</strong></p>
+          <p class="coord">Accuracy: <strong>${accuracy} meters</strong></p>
+          <p>📡 Last updated: ${new Date(position.timestamp).toLocaleTimeString()}</p>
+        `;
+      },
+      (error) => {
+        output.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 10000
+      }
+    );
+
+    // Optional: If you want to stop watching after some time
+    // setTimeout(() => navigator.geolocation.clearWatch(watchId), 60000); // 1 min
+  } else {
+    output.innerHTML = `<p class="error">Geolocation is not supported by your browser.</p>`;
+  }
+</script>
+
 </body>
 </html>
