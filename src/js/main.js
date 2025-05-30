@@ -83,9 +83,9 @@ class PhotoUploader {
       return;
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      // 10MB limit
-      this.showError("File size must be less than 10MB.");
+    if (file.size > 15 * 1024 * 1024) {
+      // 15MB limit
+      this.showError("File size must be less than 15MB.");
       return;
     }
 
