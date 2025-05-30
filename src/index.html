@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Upload</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Photo Upload Tool</h1>
+      <p>Upload your images and get shareable URLs</p>
+    </header>
+    <main>
+      <div class="upload-container">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-content">
+            <svg
+              class="upload-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7,10 12,15 17,10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <h3>Drop your image here</h3>
+            <p>or click to browse</p>
+            <input type="file" id="fileInput" accept="image/*" hidden />
+          </div>
+        </div>
+
+        <div
+          class="progress-container"
+          id="progressContainer"
+          style="display: none"
+        >
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p id="progressText">Uploading...</p>
+        </div>
+
+        <div
+          class="result-container"
+          id="resultContainer"
+          style="display: none"
+        >
+          <h3>Upload Successful!</h3>
+          <div class="url-container">
+            <input type="text" id="resultUrl" readonly />
+            <button id="copyBtn">Copy URL</button>
+          </div>
+          <div class="image-preview">
+            <img id="previewImage" alt="Uploaded image" />
+          </div>
+          <button id="uploadAnotherBtn">Upload Another</button>
+        </div>
+
+        <div class="error-container" id="errorContainer" style="display: none">
+          <h3>Upload Failed</h3>
+          <p id="errorMessage"></p>
+          <button id="retryBtn">Try Again</button>
+        </div>
+      </div>
+    </main>
+    <script src="js/main.js"></script>
+  </body>
+</html>
